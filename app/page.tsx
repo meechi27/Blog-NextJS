@@ -1,14 +1,7 @@
-// Importing all our separated components
-// Think of these like importing ingredients for a recipe
+import Hero from './components/Hero';
+import BlogGrid from './components/BlogGrid';
 
-import Hero from './components/Hero/page';
-import BlogGrid from './components/BlogGrid/page';
-
-
-// This is the main App component - it now just assembles all the pieces
-function App() {
-  // This is sample blog post data (just for display purposes, no real backend)
-  // Each object in this array represents one blog post
+export default function Home() {
   const blogPosts = [
     {
       id: 1,
@@ -66,23 +59,10 @@ function App() {
     }
   ];
 
-  // The return statement now just stacks our components like building blocks
-  // Much cleaner and easier to read!
   return (
     <div className="min-h-screen bg-gray-50">
-      
-
-      {/* Hero component - displays the big blue banner section */}
       <Hero />
-
-      {/* BlogGrid component - displays all the blog post cards */}
-      {/* We pass the blogPosts data to it using posts={blogPosts} */}
       <BlogGrid posts={blogPosts} />
-
-      
     </div>
   );
 }
-
-// Export so main.tsx can use this component
-export default App;
