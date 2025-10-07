@@ -1,13 +1,13 @@
 'use client';
-
+import { redirect } from 'next/navigation';
 import { NotebookPen, Notebook } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 function Hero() {
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push('https://www.google.com');
+  const redirectBlogList = () => {
+    router.push('/blogs-list');
   };
 
   return (
@@ -23,7 +23,7 @@ function Hero() {
           </p>
 
           <button
-            onClick={handleClick}
+            onClick={redirectBlogList}
             className="bg-white text-blue-600 pl-7 pr-5 py-3 mr-8 rounded-lg font-semibold hover:cursor-pointer hover:bg-blue-50 transition-colors inline-flex items-center gap-4"
           >
             Start Reading
