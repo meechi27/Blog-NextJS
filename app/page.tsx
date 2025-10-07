@@ -2,6 +2,10 @@ import Hero from './components/Hero';
 import BlogGrid from './components/BlogGrid';
 
 export default function Home() {
+
+  // we simulate fetching data here from a database or an API
+  // Each blog post now includes a 'content' field
+
   const blogPosts = [
     {
       id: 1,
