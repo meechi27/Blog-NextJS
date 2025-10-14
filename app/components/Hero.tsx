@@ -1,5 +1,5 @@
 'use client';
-import { redirect } from 'next/navigation';
+
 import { NotebookPen, Notebook } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -9,7 +9,10 @@ function Hero() {
   const redirectBlogList = () => {
     router.push('/blogs-list');
   };
-
+  
+  const redirectCreateBlog = () => {
+    router.push('/create-blog');
+  };
   return (
     <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white">
       <div className="max-w-6xl mx-auto px-6 py-20">
@@ -30,7 +33,9 @@ function Hero() {
             <Notebook className="w-5 h-5" />
           </button>
 
-          <button className="bg-blue-700 border-[1.2px] text-white pl-7 pr-5 py-3 rounded-lg font-semibold hover:cursor-pointer hover:border-blue-500 hover:bg-blue-500 transition-colors inline-flex items-center gap-4">
+          <button
+            onClick={redirectCreateBlog}
+            className="bg-blue-700 border-[1.2px] text-white pl-7 pr-5 py-3 rounded-lg font-semibold hover:cursor-pointer hover:border-blue-500 hover:bg-blue-500 transition-colors inline-flex items-center gap-4">
             Start Writing
             <NotebookPen color="white" className="w-5 h-5" />
           </button>
