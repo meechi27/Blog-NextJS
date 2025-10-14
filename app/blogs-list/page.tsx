@@ -3,7 +3,7 @@ import BlogGrid from '../components/BlogGrid';
 
 
 export default function BlogsList() {
-  // we simulate fetching data here from a database or an API
+  
   
   const blogPosts = [
     {
