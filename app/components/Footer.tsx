@@ -1,4 +1,4 @@
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Link } from 'lucide-react';
 
 function Footer() {
   return (
@@ -18,10 +18,10 @@ function Footer() {
 
           {/* Quick Links */}
           <div className="flex gap-8 text-sm">
-            <a href="/" className="hover:text-white transition-colors">Home</a>
-            <a href="/blogs-list" className="hover:text-white transition-colors">Articles</a>
-            <a href="/create-blog" className="hover:text-white transition-colors">Write</a>
-            <a href="/about" className="hover:text-white transition-colors">About</a>
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <Link href="/blogs-list" className="hover:text-white transition-colors">Articles</Link>
+            <Link href="/create-blog" className="hover:text-white transition-colors">Write</Link>
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
           </div>
         </div>
 
