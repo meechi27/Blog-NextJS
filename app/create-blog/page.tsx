@@ -1,14 +1,54 @@
 'use client';
 import { useState } from 'react';
-import { Calendar, User, Clock, Tag } from 'lucide-react';
+import { Clock, Tag, User } from 'lucide-react';
 
 export default function CreateBlog() {
+  const [formData, setFormData] = useState({
+    title: '',
+    category: '',
+    author: '',
+    readTime: '',
+    excerpt: '',
+    content: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('https://thought-flow.ct.ws/back/createBlog.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log('Server response:', data);
+
+      if (data.success) {
+        alert('✅ Blog created successfully!');
+      } else {
+        alert('❌ ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error creating blog:', error);
+      alert('⚠️ Failed to connect to the server.');
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Create New Article</h1>
-      
-      <form className="space-y-6">
-        {/* Title Input */}
+
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        {/* Title */}
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
             Title
@@ -17,12 +57,14 @@ export default function CreateBlog() {
             type="text"
             id="title"
             name="title"
+            value={formData.title}
+            onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="Enter your article title"
           />
         </div>
 
-        {/* Category Selection */}
+        {/* Category */}
         <div>
           <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
             Category
@@ -30,6 +72,8 @@ export default function CreateBlog() {
           <select
             id="category"
             name="category"
+            value={formData.category}
+            onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Select a category</option>
@@ -42,21 +86,20 @@ export default function CreateBlog() {
           </select>
         </div>
 
-        {/* Author Info */}
+        {/* Author */}
         <div>
           <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-2">
-            Author Name
+            Author
           </label>
-          <div className="relative">
-            <input
-              type="text"
-              id="author"
-              name="author"
-              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Your name"
-            />
-            <User className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
-          </div>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Your name"
+          />
         </div>
 
         {/* Read Time */}
@@ -64,17 +107,15 @@ export default function CreateBlog() {
           <label htmlFor="readTime" className="block text-sm font-medium text-gray-700 mb-2">
             Read Time (in minutes)
           </label>
-          <div className="relative">
-            <input
-              type="number"
-              id="readTime"
-              name="readTime"
-              min="1"
-              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="5"
-            />
-            <Clock className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
-          </div>
+          <input
+            type="number"
+            id="readTime"
+            name="readTime"
+            value={formData.readTime}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="5"
+          />
         </div>
 
         {/* Excerpt */}
@@ -85,9 +126,11 @@ export default function CreateBlog() {
           <textarea
             id="excerpt"
             name="excerpt"
+            value={formData.excerpt}
+            onChange={handleChange}
             rows={3}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Write a brief summary of your article"
+            placeholder="Write a short summary..."
           ></textarea>
         </div>
 
@@ -99,20 +142,21 @@ export default function CreateBlog() {
           <textarea
             id="content"
             name="content"
+            value={formData.content}
+            onChange={handleChange}
             rows={10}
             className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Write your article content here"
+            placeholder="Write your full article..."
           ></textarea>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <div className="flex justify-end">
           <button
             type="submit"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2"
           >
             Publish Article
-            <Tag className="w-5 h-5" />
           </button>
         </div>
       </form>
