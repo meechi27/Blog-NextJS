@@ -40,7 +40,7 @@ export default function About() {
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold text-gray-800">Join Our Community</h2>
             <p className="text-gray-600 leading-relaxed">
-              Whether you're here to learn or share your knowledge, ThoughtFlow welcomes you 
+              Whether you are here to learn or share your knowledge, ThoughtFlow welcomes you 
               to be part of our growing community. Start reading or writing today and help us 
               build a valuable resource for everyone.
             </p>
