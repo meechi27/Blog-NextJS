@@ -1,6 +1,11 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+
+// Disable SSR for this page
+export const dynamic = 'force-dynamic';
+
 export default function CreateBlog() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -56,7 +61,7 @@ export default function CreateBlog() {
           excerpt: '',
           content: '',
         });
-        router.push('/');
+        router.push('/'); // Navigate to the homepage
       } else {
         alert('❌ ' + data.message);
       }
