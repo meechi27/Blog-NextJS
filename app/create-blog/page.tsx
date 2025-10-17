@@ -9,24 +9,36 @@ export default function CreateBlog() {
     author: '',
     readTime: '',
     excerpt: '',
-    content: ''
+    content: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Basic validation to ensure all required fields are filled
+    if (!formData.title || !formData.category || !formData.author || !formData.readTime || !formData.excerpt || !formData.content) {
+      alert('⚠️ Please fill out all fields before publishing.');
+      return;
+    }
+
+    // Add the current timestamp to the form data
+    const blogData = {
+      ...formData,
+      publishTime: new Date().toISOString(), // Add the publish time
+    };
+
     try {
-       const response = await fetch('https://thought-flow-hh8a.onrender.com/createBlog.php', {
+      const response = await fetch('https://thought-flow-hh8a.onrender.com/createBlog.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(blogData),
       });
 
       const data = await response.json();
@@ -34,6 +46,15 @@ export default function CreateBlog() {
 
       if (data.success) {
         alert('✅ Blog created successfully!');
+        // Optionally reset the form after successful submission
+        setFormData({
+          title: '',
+          category: '',
+          author: '',
+          readTime: '',
+          excerpt: '',
+          content: '',
+        });
       } else {
         alert('❌ ' + data.message);
       }
