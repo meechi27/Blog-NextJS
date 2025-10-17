@@ -8,7 +8,7 @@ export default function Home() {
   const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
-    fetch("https://thought-flow.ct.ws/back/homeBlogs.php")
+    fetch('https://thought-flow-hh8a.onrender.com/homeBlogs.php')
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

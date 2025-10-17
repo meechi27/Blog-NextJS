@@ -7,7 +7,7 @@ export default function BlogsList() {
   const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
-    fetch("https://thought-flow.ct.ws/back/getBlogs.php")
+    fetch("https://thought-flow-hh8a.onrender.com/getBlogs.php")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

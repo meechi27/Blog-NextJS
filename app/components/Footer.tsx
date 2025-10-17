@@ -1,5 +1,5 @@
-import { BookOpen, Link } from 'lucide-react';
-
+import { BookOpen } from 'lucide-react';
+import Link from 'next/link';
 function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 mt-20">

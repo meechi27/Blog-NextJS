@@ -21,7 +21,7 @@ export default function CreateBlog() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://thought-flow.ct.ws/back/createBlog.php', {
+       const response = await fetch('https://thought-flow-hh8a.onrender.com/createBlog.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
