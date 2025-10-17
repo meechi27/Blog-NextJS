@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import { Clock, Tag, User } from 'lucide-react';
-
+import { useRouter } from 'next/router';
 export default function CreateBlog() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: '',
     category: '',
@@ -46,6 +46,7 @@ export default function CreateBlog() {
 
       if (data.success) {
         alert('✅ Blog created successfully!');
+
         // Optionally reset the form after successful submission
         setFormData({
           title: '',
@@ -55,6 +56,7 @@ export default function CreateBlog() {
           excerpt: '',
           content: '',
         });
+        router.push('/');
       } else {
         alert('❌ ' + data.message);
       }
